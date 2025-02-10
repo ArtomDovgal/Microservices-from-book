@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: gateway
+  config:
+    import: "optional:consul:"
   cloud:
     loadbalancer:
       ribbon:
@@ -12,7 +14,6 @@ spring:
       enabled: true
       discovery:
         query-passing: true
-
     gateway:
       routes:
         - id: multiplication
@@ -39,8 +40,6 @@ spring:
             retries: 3
             methods: GET,POST
 
-
-# Uncomment the configuration below if you want to enable route matching logs
-#logging:
-#  level:
-#    org.springframework.cloud.gateway.handler.predicate: trace
+logging:
+  level:
+    org.springframework.amqp.rabbit.connection.CachingConnectionFactory: WARN
